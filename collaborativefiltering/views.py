@@ -1,5 +1,9 @@
 from django.http import JsonResponse
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import json
+
 from collaborativefiltering.cf import *
 from collaborativefiltering.convertjson import *
 
@@ -52,4 +56,8 @@ class PostCF(View):
         # new_friend.save()
         # return JsonResponse({"created": "halo"}, safe=False)
         # except:
-        return JsonResponse({"error": "not a valid data"}, safe=False)
+        return JsonResponse(data, safe=False)
+
+    def get(self, request):
+
+        return JsonResponse({"error": "not a valid datass"}, safe=False)
