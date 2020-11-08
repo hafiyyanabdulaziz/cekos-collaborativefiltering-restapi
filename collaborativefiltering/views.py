@@ -28,14 +28,28 @@ class CollaborativeFiltering(View):
                 safe=False,
             )
 
+    # def post(self, request):
+    # data = request.body.decode("utf8")
+    # data = json.loads(data)
+    # try:
+    # new_friend = MyFriendList(
+    #    friend_name=data["friend_name"], mobile_no=data["mobile_no"]
+    # )
+    # new_friend.save()
+    # return JsonResponse({"created": "halo"}, safe=False)
+    # except:
+    # return JsonResponse({"error": "not a valid data"}, safe=False)
+
+
+class PostCF(View):
     def post(self, request):
         data = request.body.decode("utf8")
         data = json.loads(data)
-        try:
-            new_friend = MyFriendList(
-                friend_name=data["friend_name"], mobile_no=data["mobile_no"]
-            )
-            new_friend.save()
-            return JsonResponse({"created": data}, safe=False)
-        except:
-            return JsonResponse({"error": "not a valid data"}, safe=False)
+        # try:
+        # new_friend = MyFriendList(
+        #    friend_name=data["friend_name"], mobile_no=data["mobile_no"]
+        # )
+        # new_friend.save()
+        # return JsonResponse({"created": "halo"}, safe=False)
+        # except:
+        return JsonResponse({"error": "not a valid data"}, safe=False)
