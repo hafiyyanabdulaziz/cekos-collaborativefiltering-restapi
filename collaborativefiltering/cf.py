@@ -15,11 +15,22 @@ interactions_matrix = pd.pivot_table(
 
 
 def postData(data):
-    print(property_interaction_df)
-    if data["userId"] in property_interaction_df.index:
-        print("halo")
+    print(property_interaction_df.index)
+    if (data["user_id"] in property_interaction_df.index) and (
+        data["property_id"] in property_interaction_df.values
+    ):
+
+        print("ok")
     else:
-        print("waaw")
+        file = open("collaborativefiltering/dataset_interaction_excel.csv", "a")
+        file.write(
+            data["user_id"] + "," + data["property_id"] + "," + str(data["ratings"])
+        )
+        file.close()
+        print(data["user_id"])
+        print(data["property_id"])
+        print(data["ratings"])
+        print("masuk")
     return 0
 
 

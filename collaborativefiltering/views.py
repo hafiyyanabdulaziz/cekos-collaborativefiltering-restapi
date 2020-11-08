@@ -37,6 +37,6 @@ class PostCF(View):
     def post(self, request):
         data = request.body.decode("utf8")
         data = json.loads(data)
-        print(data["userId"])
+        print(data["user_id"])
         postData(data)
         return JsonResponse(data, safe=False)
