@@ -1,9 +1,21 @@
 from django.http import JsonResponse
 from django.views import View
 from collaborativefiltering.cf import *
+from collaborativefiltering.convertjson import *
 
 
 class CollaborativeFiltering(View):
+    """
+    def get(self, request, input):
+        try:
+            list = recommendations(input, 50, interactions_matrix)
+
+        except:
+            list = new_user()
+
+        return JsonResponse(convertJson(list), safe=False)
+    """
+
     def get(self, request, input):
         try:
             return JsonResponse(
