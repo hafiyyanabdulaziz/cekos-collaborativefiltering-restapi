@@ -14,6 +14,15 @@ interactions_matrix = pd.pivot_table(
 ).fillna(0)
 
 
+def postData(data):
+    print(property_interaction_df)
+    if data["userId"] in property_interaction_df.index:
+        print("halo")
+    else:
+        print("waaw")
+    return 0
+
+
 def new_user():
     list = []
     for i in range(50):
