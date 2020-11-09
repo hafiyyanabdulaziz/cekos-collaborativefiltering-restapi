@@ -2,19 +2,29 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-property_interaction_df = pd.DataFrame(
-    pd.read_csv("collaborativefiltering/dataset_interaction_excel.csv", index_col=0)
-)
-interactions_matrix = pd.pivot_table(
-    property_interaction_df,
-    values="ratings",
-    index="user_id",
-    columns="property_id",
-    aggfunc=np.max,
-).fillna(0)
+
+def propertyInteractionDF():
+    property_interaction_df = pd.DataFrame(
+        pd.read_csv("collaborativefiltering/dataset_interaction_excel.csv", index_col=0)
+    )
+    return property_interaction_df
+
+
+def interactionMatrix():
+    property_interaction_df = propertyInteractionDF()
+    interactions_matrix = pd.pivot_table(
+        property_interaction_df,
+        values="ratings",
+        index="user_id",
+        columns="property_id",
+        aggfunc=np.max,
+    ).fillna(0)
+    # print(interactions_matrix)
+    return interactions_matrix
 
 
 def postData(data):
+    property_interaction_df = propertyInteractionDF()
     print(property_interaction_df.index)
     if (data["user_id"] in property_interaction_df.index) and (
         data["property_id"] in property_interaction_df.values
@@ -36,6 +46,7 @@ def postData(data):
 
 
 def new_user():
+    property_interaction_df = propertyInteractionDF()
     list = []
     for i in range(50):
         list.append(property_interaction_df.property_id.value_counts().index[i])
@@ -62,7 +73,9 @@ def recommendations(user_id, num_of_property, user_item_interactions):
     most_similar_users = similar_users(user_id, user_item_interactions)[0]
     property_ids = set(
         list(
-            interactions_matrix.columns[np.where(interactions_matrix.loc[user_id] > 0)]
+            user_item_interactions.columns[
+                np.where(user_item_interactions.loc[user_id] > 0)
+            ]
         )
     )
     recommendations = []
@@ -71,8 +84,8 @@ def recommendations(user_id, num_of_property, user_item_interactions):
         if len(recommendations) < num_of_property:
             similar_user_property_ids = set(
                 list(
-                    interactions_matrix.columns[
-                        np.where(interactions_matrix.loc[similar_user] > 0)
+                    user_item_interactions.columns[
+                        np.where(user_item_interactions.loc[similar_user] > 0)
                     ]
                 )
             )

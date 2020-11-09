@@ -23,7 +23,7 @@ class CollaborativeFiltering(View):
     def get(self, request, input):
         try:
             return JsonResponse(
-                recommendations(input, 50, interactions_matrix),
+                recommendations(input, 50, interactionMatrix()),
                 safe=False,
             )
         except:
