@@ -26,6 +26,7 @@ def postData(data):
         file.write(
             data["user_id"] + "," + data["property_id"] + "," + str(data["ratings"])
         )
+        file.write("\n")
         file.close()
         print(data["user_id"])
         print(data["property_id"])
