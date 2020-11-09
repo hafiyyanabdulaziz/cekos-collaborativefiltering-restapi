@@ -24,19 +24,16 @@ def interactionMatrix():
 
 def postData(data):
     property_interaction_df = propertyInteractionDF()
-
-    # print(np.where(property_interaction_df == data["user_id"]))
     if (data["user_id"] in property_interaction_df.index) and (
         data["property_id"] in property_interaction_df.values
     ):
-        # print(property_interaction_df.loc[data["user_id"]].values)
-        # print(data["property_id"])
-        # print(data["ratings"])
         cekBool = False
         for cek in property_interaction_df.loc[data["user_id"]].values:
-            # print(property_interaction_df.loc[data["user_id"]].values[cek])
-            # print(cek[0])
-            # print(cek[1])
+            print(cek)
+            print(cek[0])
+            print(data["property_id"])
+            print(cek[1])
+            print(data["ratings"])
             if (cek[0] == data["property_id"]) and (cek[1] == data["ratings"]):
                 cekBool = True
         if cekBool:
@@ -48,7 +45,6 @@ def postData(data):
             )
             file.write("\n")
             file.close()
-
     else:
         file = open("collaborativefiltering/dataset_interaction_excel.csv", "a")
         file.write(
