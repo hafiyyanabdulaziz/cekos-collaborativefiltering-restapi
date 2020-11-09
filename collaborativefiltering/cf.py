@@ -19,18 +19,15 @@ def interactionMatrix():
         columns="property_id",
         aggfunc=np.max,
     ).fillna(0)
-    # print(interactions_matrix)
     return interactions_matrix
 
 
 def postData(data):
     property_interaction_df = propertyInteractionDF()
-    print(property_interaction_df.index)
     if (data["user_id"] in property_interaction_df.index) and (
         data["property_id"] in property_interaction_df.values
     ):
-
-        print("ok")
+        pass
     else:
         file = open("collaborativefiltering/dataset_interaction_excel.csv", "a")
         file.write(
@@ -38,10 +35,6 @@ def postData(data):
         )
         file.write("\n")
         file.close()
-        print(data["user_id"])
-        print(data["property_id"])
-        print(data["ratings"])
-        print("masuk")
     return 0
 
 
